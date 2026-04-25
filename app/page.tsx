@@ -10,7 +10,7 @@ import Footer from '../components/Footer'
 
 
 const FRAMES   = 169
-const getFrame = (i: number) => `/harbourbridge/ezgif-frame-${String(i+1).padStart(3,'0')}.png`
+const getFrame = (i: number) => `/harbourbridge/ezgif-frame-${String(i+1).padStart(3,'0')}.webp`
 
 const BRANDS = [
   {
