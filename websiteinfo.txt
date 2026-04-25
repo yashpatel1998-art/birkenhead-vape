@@ -1,0 +1,310 @@
+==========================================================
+  BIRKENHEAD VAPE SHOP — COMPLETE WEBSITE INFO FILE
+  Updated with Products & Brands — April 2025
+==========================================================
+
+----------------------------------------------------------
+SECTION 1 — BUSINESS DETAILS
+----------------------------------------------------------
+
+Business Name     : Birkenhead Vape Shop
+Short Name        : BVS
+Tagline           : The Cloud Has Landed
+Address           : 45 Birkenhead Avenue, Birkenhead, Auckland 0626
+Phone             : 022 328 6322
+Country           : New Zealand
+Age Restriction   : 18+ Only
+Compliance        : NZ Ministry of Health
+                    Smokefree Environments and Regulated Products Act 1990
+
+OPENING HOURS:
+  Monday          : 08:00 — 21:00
+  Tuesday         : 08:00 — 21:00
+  Wednesday       : 08:00 — 21:00
+  Thursday        : 08:00 — 21:00
+  Friday          : 08:00 — 21:00
+  Saturday        : 08:00 — 21:00
+  Sunday          : 08:00 — 20:00
+
+----------------------------------------------------------
+SECTION 2 — BRAND & DESIGN
+----------------------------------------------------------
+
+COLOURS:
+  Primary Neon    : #00E5FF  (Cyan)
+  Secondary       : #BF00FF  (Electric Violet)
+  Accent          : #FF2079  (Hot Pink)
+  Background      : #000000  (Pure Black)
+  Dark 2          : #060610
+  Dark 3          : #0a0a1a
+  Body Text       : #e8e8f0
+  Muted           : #6b6b90
+
+FONTS (Google Fonts):
+  Headings        : Orbitron (weight 900)
+  Body            : Rajdhani (weight 300–600)
+  Tags/Mono       : Share Tech Mono (weight 400)
+
+ANIMATION STYLE:
+  Hero            : Smoke explosion frame sequence (ezgif-frame-001.jpg …)
+  Particles       : Floating neon sparkles over video/frames
+  Sections        : Fade-up reveal on scroll
+  Orb             : Floating pulse (About section)
+  Map Pin         : Glowing ring expand (Find Us section)
+
+----------------------------------------------------------
+SECTION 3 — WEBSITE PAGES
+----------------------------------------------------------
+
+PAGE 1: HOME (Hero)
+  Eyebrow         : // Birkenhead, Auckland — Est. 2024
+  Heading Line 1  : Birkenhead
+  Heading Line 2  : Vape
+  Heading Line 3  : Shop
+  Tagline         : The Cloud Has Landed
+  Button 1        : Find Us
+  Button 2        : Our Story
+  Scroll label    : SCROLL ↓
+
+PAGE 2: ABOUT US
+  Tag             : // 01 — About Us
+  Heading         : Your Local Vape Destination
+  Para 1          : Nestled in the heart of Birkenhead, Auckland, we're
+                    your trusted local specialist for premium vaping
+                    products. We believe in helping smokers transition to
+                    a less harmful alternative — with expert knowledge,
+                    quality products, and a welcoming community.
+  Para 2          : Our team is passionate, knowledgeable, and always
+                    here to guide you — whether you're brand new or a
+                    seasoned cloud chaser.
+  Stats           : 18+ Age Restricted | 7 Days a Week
+                    100% MoH Compliant | BKH Auckland Local
+  Badge           : NZ Ministry of Health — Fully Compliant Retailer
+
+PAGE 3: FIND US
+  Tag             : // 02 — Find Us
+  Heading         : Come Visit Us
+  Phone           : 022 328 6322
+  Address         : 45 Birkenhead Avenue, Birkenhead, Auckland 0626
+  Google Maps     : https://maps.google.com/?q=45+Birkenhead+Avenue+Birkenhead+Auckland+0626
+
+PAGE 4: PRODUCTS
+  Tag             : // 03 — Our Products
+  Heading         : What We Stock
+  Note            : Product names and specs only — no product images
+                    (NZ Smokefree Environments Act compliant)
+
+PAGE 5: CONTACT
+  Tag             : // 04 — Contact
+  Heading         : Get In Touch
+  Legal Notice    : All products sold at Birkenhead Vape Shop are for
+                    use by persons aged 18 years and over only. Vaping
+                    products are regulated under the Smokefree
+                    Environments and Regulated Products Act 1990.
+                    Vaping is not without risk. For more information,
+                    visit the NZ Ministry of Health.
+
+----------------------------------------------------------
+SECTION 4 — PRODUCTS & BRANDS
+----------------------------------------------------------
+
+NZ COMPLIANCE NOTE:
+  - No product images permitted (NZ law)
+  - No promotional language (NZ law)
+  - Text listings of product names and specs only — permitted
+  - Health warning must appear near all product listings
+
+==========================================
+BRAND 1: INMOOD
+==========================================
+
+--- INMOOD SWITCH ---
+
+Product: Inmood Switch — Starter Kit
+Type    : Prefilled Pod Vape Kit (battery + pod included)
+Puffs   : Up to 5,000
+Battery : 550mAh removable battery, USB Type-C charging
+Coil    : 1.0Ω mesh
+Pod     : 10ml e-liquid capacity
+Features: Adjustable airflow, Child lock, Rechargeable
+Nicotine: 26mg/ml (high) or 16mg/ml (low)
+Category: Pod Vapes > Prefilled Starter Kits
+
+---
+
+Product: Inmood Switch — Replacement Pod
+Type    : Prefilled replacement pod (pod only, no battery)
+Puffs   : Up to 5,000
+Coil    : 1.0Ω mesh
+Capacity: 10ml e-liquid
+Nicotine: 26mg/ml or 16mg/ml
+Also    : Available in Twin Pack (2 pods)
+Also    : Available in 0% Nicotine (nicotine free) version
+Also    : Available in Custard Range (Vanilla Custard,
+          Strawberry Custard, Coffee)
+Category: Pod Vapes > Prefilled Replacement Pods
+
+---
+
+Product: Inmood Switch — Battery Kit (device only)
+Type    : Reusable battery device (no pod included)
+Battery : 550mAh, USB Type-C
+Features: Adjustable airflow, Child lock
+Compat  : Compatible with all Inmood Switch pods
+Category: Pod Vapes > Prefilled Pod Device Only
+
+---
+
+Product: Inmood Switch+ — Battery Kit (upgraded)
+Type    : Reusable battery device (no pod included)
+Battery : 650mAh (upgraded from 550mAh), USB Type-C
+Features: Adjustable airflow, Child lock function
+Note    : Tap USB port 5 times to turn ON/OFF
+Compat  : Compatible with all Inmood Switch pods
+Category: Pod Vapes > Prefilled Pod Device Only
+
+--- INMOOD PRISM ---
+
+Product: Inmood Prism — Starter Kit
+Type    : Prefilled Pod Vape Kit (battery + pod included)
+Puffs   : Up to 15,000
+Battery : 1300mAh removable, USB Type-C rechargeable
+Coil    : Dual mesh coils (1Ω each)
+Capacity: 16ml e-liquid
+Features: LED screen, Child lock, Auto-off 10 min
+Note    : Press and hold both arrow buttons 5 sec to ON/OFF
+Nicotine: 20mg/mL
+Category: Pod Vapes > Prefilled Starter Kits > Above 10,000 puffs
+
+---
+
+Product: Inmood Prism — Replacement Pods (15,000 puffs)
+Type    : Prefilled replacement pod (pod only)
+Puffs   : Up to 15,000
+Capacity: 16ml e-liquid
+Coil    : Dual mesh coils
+Battery : Requires Inmood Prism Battery Kit (sold separately)
+Category: Pod Vapes > Prefilled Replacement Pods
+
+---
+
+Product: Inmood Prism 20K — Replacement Pods (Clear)
+Type    : Prefilled replacement pod — clear/transparent pod
+Puffs   : Up to 20,000
+Note    : Clear pod lets you track remaining e-liquid level
+Compat  : Compatible with Inmood Prism Battery Kit
+Category: Pod Vapes > Prefilled Replacement Pods > Above 10,000 puffs
+
+---
+
+Product: Inmood Prism — Battery Kit (device only)
+Type    : Reusable battery device (no pod included)
+Battery : 1300mAh, USB Type-C
+Features: LED screen, Child lock, Auto-off after 10 min
+Note    : Press and hold both arrow buttons 5 sec to ON/OFF
+Compat  : Compatible with all Inmood Prism replacement pods
+Category: Pod Vapes > Prefilled Pod Device Only
+
+--- INMOOD 10K ---
+
+Product: Inmood 10K — Starter Kit
+Type    : Prefilled Pod Vape Kit (battery + pod included)
+Puffs   : Up to 10,000
+Capacity: 15ml e-liquid
+Nicotine: 26mg/ml (4% Nicotine Salt)
+PG/VG   : 55:45
+Coil    : 1.0Ω
+Category: Pod Vapes > Prefilled Starter Kits > Up to 10,000 puffs
+
+---
+
+Product: Inmood 10K — Replacement Pods
+Type    : Prefilled replacement pod (pod only)
+Puffs   : Up to 10,000
+Compat  : Requires Inmood 10K battery device
+Category: Pod Vapes > Prefilled Replacement Pods > Up to 10,000 puffs
+
+==========================================
+BRAND 2: WOTOFO
+==========================================
+
+--- WOTOFO NEXPOD STICK (3500 PUFFS) ---
+
+Product: Wotofo nexPOD Stick — Starter Kit
+Type    : Prefilled Pod Vape Kit (battery + pod included)
+Puffs   : Up to 3,500
+Capacity: 5.5ml e-liquid
+Nicotine: 20mg/ml
+Features: Mesh coil, rechargeable battery
+Category: Pod Vapes > Prefilled Starter Kits > Up to 5,000 puffs
+
+---
+
+Product: Wotofo nexPOD Stick — Replacement Pods (3500 puffs)
+Type    : Prefilled replacement pod (pod only)
+Puffs   : Up to 3,500
+Capacity: 5.5ml e-liquid
+Nicotine: 20mg/ml
+Compat  : Compatible with Wotofo nexPOD Stick battery kit
+Category: Pod Vapes > Prefilled Replacement Pods > Up to 5,000 puffs
+
+--- WOTOFO NEXPOD 25K ---
+
+Product: Wotofo Nexpod 25K — Prefilled Starter Kit
+Type    : Prefilled Pod Vape Kit (all-in-one, built-in battery)
+Puffs   : Up to 25,000
+Capacity: 18.5ml e-liquid
+Nicotine: 20mg/ml or 26.5mg/ml
+Coil    : 0.5Ω dual mesh
+Battery : 1000mAh built-in, USB Type-C (2A fast charge)
+Output  : Max 25W
+Features: LED screen, Dual power modes (Regular & Turbo),
+          Adjustable airflow, Child lock
+Note    : Press power button 5 times rapidly to ON/OFF
+          Toggle power modes with single press when ON
+Category: Pod Vapes > Prefilled Starter Kits > Above 10,000 puffs
+
+---
+
+Product: Wotofo Nexpod 25K — Replacement Pods
+Type    : Prefilled replacement pod (pod only)
+Puffs   : Up to 25,000
+Capacity: 18.5ml e-liquid
+Coil    : 0.5Ω dual mesh
+Nicotine: 20mg/ml
+Compat  : Compatible with Wotofo Nexpod 25K battery device
+Category: Pod Vapes > Prefilled Replacement Pods > Above 10,000 puffs
+
+----------------------------------------------------------
+SECTION 5 — LEGAL & COMPLIANCE
+----------------------------------------------------------
+
+Health Warning (display near all products):
+  "Vaping products may contain nicotine which is a highly
+   addictive substance."
+
+Age Restriction Notice:
+  "All products are for use by persons aged 18 years and
+   over only. By entering this site you confirm you are 18+."
+
+Regulatory Reference:
+  Smokefree Environments and Regulated Products Act 1990
+  NZ Ministry of Health — www.health.govt.nz
+
+Prohibited on website (NZ law):
+  - Product images
+  - Promotional pricing / discounts
+  - Advertising language
+  - Social media promotion
+  - Giveaways or competitions
+
+Permitted on website (NZ law):
+  - Store name, address, hours, phone
+  - Product names and technical specifications
+  - Brand names
+  - Health information (vaping as smoking alternative)
+  - Age verification gate
+
+----------------------------------------------------------
+END OF WEBSITEINFO.TXT
+----------------------------------------------------------
