@@ -336,75 +336,23 @@ function LiquidNav() {
 
 
 /* ─── Page 1: Harbour Bridge — Cinematic Scroll ──────────────── */
+/* ─── Page 1: Harbour Bridge — Cinematic Scroll ──────────────── */
 function HarbourScroll() {
   const wrapRef   = useRef<HTMLDivElement>(null)
   const canvasRef = useRef<HTMLCanvasElement>(null)
   const [loadPct, setLoadPct] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
+  // Hook 1: detect mobile
   useEffect(() => {
     setIsMobile(window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent))
   }, [])
 
-  // ── MOBILE: lightweight static hero — no frames, no canvas ──
-  if (isMobile) {
-    return (
-      <div style={{ height:'100vh', position:'relative', background:'#000', overflow:'hidden' }}>
-        {/* Static background — first frame only */}
-        <img
-          src={getFrame(0)}
-          alt=""
-          style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.5 }}
-        />
-        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))' }} />
-
-        {/* Floating orbs — CSS only */}
-        <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', background:'radial-gradient(circle,rgba(142,207,216,0.06) 0%,transparent 70%)', top:'-5%', right:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb1 16s ease-in-out infinite' }} />
-        <div style={{ position:'absolute', width:250, height:250, borderRadius:'50%', background:'radial-gradient(circle,rgba(184,160,208,0.05) 0%,transparent 70%)', bottom:'10%', left:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb2 20s ease-in-out infinite' }} />
-
-        {/* Content */}
-        <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', zIndex:2, padding:'0 1.5rem', textAlign:'center' }}>
-          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(142,207,216,0.7)', fontSize:9, letterSpacing:'0.5em', marginBottom:16 }}>
-            // Birkenhead, Auckland — Est. 2024
-          </p>
-          <h1 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
-            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#F0EDE6', textShadow:'0 0 30px rgba(240,237,230,0.08)' }}>BIRKENHEAD</span>
-            <span style={{ display:'block', fontSize:'clamp(2.8rem,14vw,6rem)', color:'#8ECFD8', textShadow:'0 0 50px rgba(142,207,216,0.35)' }}>VAPE</span>
-            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#B8A0D0', textShadow:'0 0 50px rgba(184,160,208,0.3)' }}>SHOP</span>
-          </h1>
-          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.3)', fontSize:10, letterSpacing:'0.4em', marginTop:20 }}>
-            THE CLOUD HAS LANDED
-          </p>
-          <div style={{ display:'flex', gap:'0.8rem', marginTop:30, flexWrap:'wrap', justifyContent:'center' }}>
-            <a href="#products" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(142,207,216,0.6)', color:'#B8E8EE', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>
-              BROWSE PRODUCTS
-            </a>
-            <a href="#find-us" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(255,255,255,0.2)', color:'rgba(240,237,230,0.6)', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>
-              FIND US
-            </a>
-          </div>
-        </div>
-
-        {/* Scroll hint */}
-        <div style={{ position:'absolute', bottom:'2rem', left:'50%', transform:'translateX(-50%)', zIndex:2, textAlign:'center' }}>
-          <div style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.25)', fontSize:8, letterSpacing:'0.4em' }}>SCROLL TO EXPLORE</div>
-          <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2, marginTop:6 }}>
-            {[0,1,2].map(i => (
-              <svg key={i} width="14" height="8" viewBox="0 0 16 10" fill="none" style={{ animation:`chevronFade 1.5s ease-in-out ${i*0.2}s infinite`, opacity:0 }}>
-                <path d="M1 1L8 8L15 1" stroke="rgba(142,207,216,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            ))}
-          </div>
-        </div>
-      </div>
-    )
-  }
-
-  // ── DESKTOP: full frame animation ──
-
+  // Hook 2: desktop frame animation (guarded — skips on mobile)
   useEffect(() => {
-    gsap.registerPlugin(ScrollTrigger)
+    if (isMobile !== false) return // skip on mobile AND on null (not yet detected)
 
+    gsap.registerPlugin(ScrollTrigger)
     const wrap   = wrapRef.current
     const canvas = canvasRef.current
     if (!wrap || !canvas) return
@@ -413,7 +361,6 @@ function HarbourScroll() {
     ctx.imageSmoothingEnabled = true
     ctx.imageSmoothingQuality = 'high'
 
-    // ── Resize — pixel-perfect canvas at native DPR ──
     const resize = () => {
       const dpr = window.devicePixelRatio || 1
       canvas.width  = window.innerWidth  * dpr
@@ -427,7 +374,6 @@ function HarbourScroll() {
     resize()
     window.addEventListener('resize', resize)
 
-    // ── Draw — cached scale so no recalc every frame ──
     let lastW = 0, lastH = 0, lastIW = 0
     let cScale = 1, cX = 0, cY = 0
     const draw = (img: HTMLImageElement) => {
@@ -442,7 +388,6 @@ function HarbourScroll() {
       ctx.drawImage(img, cX, cY, img.naturalWidth * cScale, img.naturalHeight * cScale)
     }
 
-    // ── Preload — decode ahead for zero-jank frame switching ──
     const imgs: HTMLImageElement[] = new Array(FRAMES)
     let loadCount = 0
     for (let i = 0; i < FRAMES; i++) {
@@ -458,7 +403,6 @@ function HarbourScroll() {
       imgs[i] = img
     }
 
-    // ── Nearest loaded frame ──
     const nearestLoaded = (n: number) => {
       const ni = Math.round(n)
       if (imgs[ni]?.complete) return ni
@@ -469,7 +413,6 @@ function HarbourScroll() {
       return 0
     }
 
-    // ── RAF interpolation — frames lerp for silk smooth motion ──
     let targetFrame  = 0
     let currentFrame = 0
     let rafId = 0
@@ -483,7 +426,6 @@ function HarbourScroll() {
     }
     rafId = requestAnimationFrame(rafLoop)
 
-    // ── GSAP timeline — scrub:true = zero lag, RAF handles smoothing ──
     const hero    = document.getElementById('hero')
     const hint    = document.getElementById('hint')
     const endText = document.getElementById('end-text')
@@ -494,7 +436,7 @@ function HarbourScroll() {
       scrollTrigger: {
         trigger: wrap,
         start:   'top top',
-        end:     () => `+=${window.innerHeight * 3}`,  // frames play over 300vh, last 100vh hero stays locked
+        end:     () => `+=${window.innerHeight * 3}`,
         scrub:   true,
         onUpdate: (self) => { targetFrame = self.progress * (FRAMES - 1) },
       },
@@ -508,7 +450,6 @@ function HarbourScroll() {
       tl.fromTo(endText, { opacity: 0, y: 30 }, { opacity: 1, y: 0, ease: 'none', duration: 15 }, 80)
     }
 
-    // Brand reveals
     const brandReveals = [
       { name: 'WOTOFO',  start: 22, end: 40, side: 'left'  },
       { name: 'INMOOD',  start: 40, end: 58, side: 'right' },
@@ -528,22 +469,56 @@ function HarbourScroll() {
       ScrollTrigger.getAll().forEach(t => t.kill())
       window.removeEventListener('resize', resize)
     }
-  }, [])
+  }, [isMobile])
 
+  // ── Loading state ──
+  if (isMobile === null) return <div style={{ height:'100vh', background:'#000' }} />
+
+  // ── MOBILE RENDER ──
+  if (isMobile) {
+    return (
+      <div style={{ height:'100vh', position:'relative', background:'#000', overflow:'hidden' }}>
+        <img src={getFrame(0)} alt="" style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', opacity:0.5 }} />
+        <div style={{ position:'absolute', inset:0, background:'linear-gradient(to bottom, rgba(0,0,0,0.3), rgba(0,0,0,0.8))' }} />
+        <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', background:'radial-gradient(circle,rgba(142,207,216,0.06) 0%,transparent 70%)', top:'-5%', right:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb1 16s ease-in-out infinite' }} />
+        <div style={{ position:'absolute', width:250, height:250, borderRadius:'50%', background:'radial-gradient(circle,rgba(184,160,208,0.05) 0%,transparent 70%)', bottom:'10%', left:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb2 20s ease-in-out infinite' }} />
+        <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', zIndex:2, padding:'0 1.5rem', textAlign:'center' }}>
+          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(142,207,216,0.7)', fontSize:9, letterSpacing:'0.5em', marginBottom:16 }}>// Birkenhead, Auckland — Est. 2024</p>
+          <h1 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
+            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#F0EDE6' }}>BIRKENHEAD</span>
+            <span style={{ display:'block', fontSize:'clamp(2.8rem,14vw,6rem)', color:'#8ECFD8', textShadow:'0 0 50px rgba(142,207,216,0.35)' }}>VAPE</span>
+            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#B8A0D0', textShadow:'0 0 50px rgba(184,160,208,0.3)' }}>SHOP</span>
+          </h1>
+          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.3)', fontSize:10, letterSpacing:'0.4em', marginTop:20 }}>THE CLOUD HAS LANDED</p>
+          <div style={{ display:'flex', gap:'0.8rem', marginTop:30, flexWrap:'wrap', justifyContent:'center' }}>
+            <a href="#products" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(142,207,216,0.6)', color:'#B8E8EE', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>BROWSE PRODUCTS</a>
+            <a href="#find-us" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(255,255,255,0.2)', color:'rgba(240,237,230,0.6)', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>FIND US</a>
+          </div>
+        </div>
+        <div style={{ position:'absolute', bottom:'2rem', left:'50%', transform:'translateX(-50%)', zIndex:2, textAlign:'center' }}>
+          <div style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.25)', fontSize:8, letterSpacing:'0.4em' }}>SCROLL TO EXPLORE</div>
+          <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2, marginTop:6 }}>
+            {[0,1,2].map(i => (
+              <svg key={i} width="14" height="8" viewBox="0 0 16 10" fill="none" style={{ animation:`chevronFade 1.5s ease-in-out ${i*0.2}s infinite`, opacity:0 }}>
+                <path d="M1 1L8 8L15 1" stroke="rgba(142,207,216,0.6)" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
+              </svg>
+            ))}
+          </div>
+        </div>
+      </div>
+    )
+  }
+
+  // ── DESKTOP RENDER ──
   return (
     <div ref={wrapRef} style={{ height:'500vh', position:'relative', background:'#000' }}>
-
-      {/* Loading bar */}
       {loadPct < 100 && (
         <div style={{ position:'fixed', top:0, left:0, right:0, zIndex:200, height:2, background:'rgba(0,0,0,0.4)' }}>
           <div style={{ height:'100%', width:`${loadPct}%`, background:'linear-gradient(90deg,#8ECFD8,#B8A0D0)', transition:'width 0.12s ease' }} />
         </div>
       )}
-
       <div style={{ position:'sticky', top:0, height:'100vh', overflow:'hidden' }}>
         <canvas ref={canvasRef} style={{ position:'absolute', inset:0, width:'100%', height:'100%' }} />
-
-        {/* Hero text */}
         <div id="hero" style={{ position:'absolute', inset:0, zIndex:4, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'0 1.5rem', pointerEvents:'none' }}>
           <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(142,207,216,0.7)', fontSize:'clamp(9px,2vw,11px)', letterSpacing:'0.5em', marginBottom:16, opacity:0.7 }}>// Birkenhead, Auckland — Est. 2024</p>
           <h1 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
@@ -552,47 +527,22 @@ function HarbourScroll() {
             <span style={{ display:'block', fontSize:'clamp(1.8rem,7vw,6rem)', color:'#BF00FF', textShadow:'0 0 80px rgba(191,0,255,0.8)' }}>SHOP</span>
           </h1>
         </div>
-
-        {/* Brand name reveals — alternating left/right scroll teaser */}
         {[
-          { name: 'WOTOFO',  sub: '25,000 PUFFS',   color: '#00E5FF', start: 22, end: 40, side: 'left'  },
-          { name: 'INMOOD',  sub: 'SWITCH · PRISM',  color: '#BF00FF', start: 40, end: 58, side: 'right' },
-          { name: 'SLAPPLE', sub: 'E-LIQUID 120ML',  color: '#39d353', start: 58, end: 76, side: 'left'  },
-          { name: 'CLOUDYS', sub: 'NIC SALT 30ML',   color: '#a78bfa', start: 76, end: 90, side: 'right' },
+          { name: 'WOTOFO',  sub: '25,000 PUFFS',   color: '#00E5FF', side: 'left'  },
+          { name: 'INMOOD',  sub: 'SWITCH · PRISM',  color: '#BF00FF', side: 'right' },
+          { name: 'SLAPPLE', sub: 'E-LIQUID 120ML',  color: '#39d353', side: 'left'  },
+          { name: 'CLOUDYS', sub: 'NIC SALT 30ML',   color: '#a78bfa', side: 'right' },
         ].map(b => (
           <div key={b.name} id={`brand-reveal-${b.name}`} style={{
-            position: 'absolute',
-            ...(b.side === 'left' ? { left: '2.5rem' } : { right: '2.5rem' }),
-            top: '50%',
-            transform: 'translateY(-50%)',
-            zIndex: 4, pointerEvents: 'none', opacity: 0,
+            position:'absolute', ...(b.side === 'left' ? { left:'2.5rem' } : { right:'2.5rem' }),
+            top:'50%', transform:'translateY(-50%)', zIndex:4, pointerEvents:'none', opacity:0,
             textAlign: b.side === 'right' ? 'right' : 'left',
           }}>
-            <div style={{
-              width: 2, height: 36, background: b.color,
-              marginBottom: 10,
-              marginLeft: b.side === 'right' ? 'auto' : 0,
-              boxShadow: `0 0 16px ${b.color}cc`,
-            }} />
-            <p style={{
-              fontFamily:"'Aharoni','Arial Black',sans-serif",
-              fontSize: 9, letterSpacing: '0.45em',
-              color: b.color, margin: '0 0 8px',
-              opacity: 0.75,
-              textShadow: `0 0 20px ${b.color}88`,
-            }}>{b.sub}</p>
-            <h3 style={{
-              fontFamily:"'Aharoni','Arial Black',sans-serif",
-              fontWeight: 900,
-              fontSize: 'clamp(1.8rem,4.5vw,3.5rem)',
-              color: '#fff', margin: 0, lineHeight: 1,
-              letterSpacing: '0.04em',
-              textShadow: `0 0 40px ${b.color}80, 0 2px 20px rgba(0,0,0,0.9)`,
-            }}>{b.name}</h3>
+            <div style={{ width:2, height:36, background:b.color, marginBottom:10, marginLeft: b.side === 'right' ? 'auto' : 0, boxShadow:`0 0 16px ${b.color}cc` }} />
+            <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:9, letterSpacing:'0.45em', color:b.color, margin:'0 0 8px', opacity:0.75, textShadow:`0 0 20px ${b.color}88` }}>{b.sub}</p>
+            <h3 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, fontSize:'clamp(1.8rem,4.5vw,3.5rem)', color:'#fff', margin:0, lineHeight:1, letterSpacing:'0.04em', textShadow:`0 0 40px ${b.color}80, 0 2px 20px rgba(0,0,0,0.9)` }}>{b.name}</h3>
           </div>
         ))}
-
-        {/* End text */}
         <div id="end-text" style={{ position:'absolute', inset:0, zIndex:4, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'0 1.5rem', pointerEvents:'none', opacity:0 }}>
           <h2 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
             <span style={{ display:'block', fontSize:'clamp(2.5rem,10vw,8rem)', color:'#fff', textShadow:'0 0 60px rgba(255,255,255,0.2)' }}>THE CLOUD</span>
@@ -603,11 +553,8 @@ function HarbourScroll() {
             <a href="#find-us"  style={{ padding:'1.2rem 3rem', border:'1px solid #fff', color:'#fff', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'clamp(0.7rem,1.8vw,1rem)', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>FIND US +</a>
           </div>
         </div>
-
-        {/* Scroll hint */}
         <div id="hint" style={{ position:'absolute', bottom:'2rem', left:'50%', transform:'translateX(-50%)', zIndex:5, textAlign:'center', pointerEvents:'none', display:'flex', flexDirection:'column', alignItems:'center', gap:6 }}>
           <div style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.25)', fontSize:8, letterSpacing:'0.4em' }}>SCROLL TO EXPLORE</div>
-          {/* Animated chevron arrows */}
           <div style={{ display:'flex', flexDirection:'column', alignItems:'center', gap:2 }}>
             {[0,1,2].map(i => (
               <svg key={i} width="16" height="10" viewBox="0 0 16 10" fill="none" style={{ animation:`chevronFade 1.5s ease-in-out ${i*0.2}s infinite`, opacity:0 }}>
@@ -615,17 +562,12 @@ function HarbourScroll() {
               </svg>
             ))}
           </div>
-          <style>{`
-            @keyframes chevronFade {
-              0%,100% { opacity:0; transform:translateY(-4px); }
-              50%      { opacity:0.8; transform:translateY(2px); }
-            }
-          `}</style>
         </div>
       </div>
     </div>
   )
 }
+
 
 /* ─── Glass Liquid Card ───────────────────────────────────────── */
 function GlassCard({ product, brandColor, index, onOpen }: {
@@ -1119,7 +1061,7 @@ function ZAFSection() {
   const nameRef = useRef<HTMLDivElement>(null)
   const bgRef   = useRef<HTMLDivElement>(null)
   const [current, setCurrent] = useState(0)
-  const [isMobile, setIsMobile] = useState(false)
+  const [isMobile, setIsMobile] = useState<boolean | null>(null)
 
   const fl = ZAF_FLAVOURS[current]
   const F  = "'Aharoni','Arial Black',Arial,sans-serif"
@@ -1175,6 +1117,7 @@ function ZAFSection() {
   }, [])
 
   // ── MOBILE: simple ZAF section ──
+  if (isMobile === null) return <div style={{ height:'50vh', background:'#000' }} />
   if (isMobile) {
     return (
       <section id="zaf" style={{ background:'#000', padding:'4rem 1.5rem', position:'relative', overflow:'hidden' }}>

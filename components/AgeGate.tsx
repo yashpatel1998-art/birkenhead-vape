@@ -12,14 +12,11 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
       padding: 'clamp(1rem,4vw,2rem)',
       overflow: 'auto',
     }}>
+      {/* Glow orbs — behind everything */}
+      <div style={{ position:'absolute', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%)', top:'-10%', left:'-10%', filter:'blur(60px)', pointerEvents:'none', zIndex:0 }} />
+      <div style={{ position:'absolute', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle,rgba(191,0,255,0.08) 0%,transparent 70%)', bottom:'-10%', right:'-10%', filter:'blur(60px)', pointerEvents:'none', zIndex:0 }} />
 
-      {/* Glow orbs */}
-      <div style={{ position:'absolute', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%)', top:'-10%', left:'-10%', filter:'blur(60px)', pointerEvents:'none' }} />
-      <div style={{ position:'absolute', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle,rgba(191,0,255,0.08) 0%,transparent 70%)', bottom:'-10%', right:'-10%', filter:'blur(60px)', pointerEvents:'none' }} />
-
-      <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', gap:'clamp(1.2rem,4vw,2rem)', maxWidth:420, width:'100%' }}>
-
-        {/* Logo */}
+      <div style={{ position:'relative', zIndex:10, display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', gap:'clamp(1.2rem,4vw,2rem)', maxWidth:420, width:'100%' }}>
         <div>
           <h1 style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(2rem,8vw,5rem)', color:'#fff', margin:0, letterSpacing:'0.2em', lineHeight:1 }}>
             BVS<span style={{ color:'#00E5FF' }}>.</span>
@@ -27,10 +24,8 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
           <p style={{ fontFamily:F, color:'rgba(0,229,255,0.5)', fontSize:'clamp(7px,2vw,9px)', letterSpacing:'0.5em', margin:'8px 0 0' }}>BIRKENHEAD VAPE SHOP</p>
         </div>
 
-        {/* Divider */}
         <div style={{ width:40, height:1, background:'rgba(255,255,255,0.15)' }} />
 
-        {/* Age check */}
         <div>
           <p style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(1rem,5vw,1.8rem)', color:'#fff', margin:'0 0 8px', letterSpacing:'0.05em' }}>
             ARE YOU 18+?
@@ -41,10 +36,13 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
           </p>
         </div>
 
-        {/* YES button */}
+        {/* YES button — high z-index, guaranteed clickable */}
         <button
-          onClick={onConfirm}
+          onClick={() => onConfirm()}
+          type="button"
           style={{
+            position: 'relative',
+            zIndex: 20,
             width: '100%',
             padding: 'clamp(1rem,3.5vw,1.4rem) clamp(1rem,4vw,2rem)',
             background: 'linear-gradient(135deg, rgba(0,229,255,0.15), rgba(191,0,255,0.15))',
@@ -56,30 +54,19 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
             fontSize: 'clamp(0.7rem,3vw,1.1rem)',
             letterSpacing: 'clamp(0.1em,1vw,0.3em)',
             cursor: 'pointer',
-            transition: 'all 0.2s ease',
+            minHeight: 56,
+            WebkitAppearance: 'none' as const,
             WebkitTapHighlightColor: 'transparent',
             touchAction: 'manipulation',
-            minHeight: 56,
-            boxSizing: 'border-box' as const,
-          }}
-          onMouseEnter={e => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,229,255,0.25), rgba(191,0,255,0.25))'
-            e.currentTarget.style.borderColor = '#00E5FF'
-            e.currentTarget.style.transform = 'scale(1.02)'
-          }}
-          onMouseLeave={e => {
-            e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,229,255,0.15), rgba(191,0,255,0.15))'
-            e.currentTarget.style.borderColor = 'rgba(0,229,255,0.5)'
-            e.currentTarget.style.transform = 'scale(1)'
           }}
         >
           YES, I AM 18+ — ENTER ↗
         </button>
 
-        {/* NO button */}
         <a
           href="https://www.google.com"
           style={{
+            position: 'relative', zIndex: 20,
             fontFamily: F,
             fontSize: 'clamp(7px,2vw,9px)',
             letterSpacing: '0.3em',
@@ -92,11 +79,9 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
           NO, EXIT
         </a>
 
-        {/* Legal */}
         <p style={{ fontFamily:F, fontSize:'clamp(7px,2vw,9px)', color:'rgba(255,255,255,0.15)', letterSpacing:'0.12em', lineHeight:1.8, margin:0 }}>
           ⚠ NZ SMOKEFREE ACT COMPLIANT · 18+ ONLY
         </p>
-
       </div>
     </div>
   )

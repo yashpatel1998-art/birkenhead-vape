@@ -1,6 +1,6 @@
 'use client'
 
-import { Globe3D, GlobeMarker } from '@/components/ui/3d-globe'
+import { useEffect, useState } from 'react'
 
 const F = "'Aharoni','Arial Black',Arial,sans-serif"
 
@@ -15,14 +15,41 @@ const C = {
   green: '#1A8040',
 }
 
-const markers: GlobeMarker[] = [
-  {
-    lat: -36.8109,
-    lng: 174.7398,
+function GlobeWrapper() {
+  const [Globe, setGlobe] = useState<any>(null)
+  const [failed, setFailed] = useState(false)
+
+  useEffect(() => {
+    // Dynamic import — if Globe3D fails, we just skip it
+    import('@/components/ui/3d-globe')
+      .then(mod => setGlobe(() => mod.Globe3D))
+      .catch(() => setFailed(true))
+  }, [])
+
+  if (failed || !Globe) return null
+
+  const markers = [{
+    lat: -36.8109, lng: 174.7398,
     src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAzMiA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYgMEM3LjE2MyAwIDAgNy4xNjMgMCAxNmMwIDEwIDE2IDI0IDE2IDI0UzMyIDI2IDMyIDE2QzMyIDcuMTYzIDI0LjgzNyAwIDE2IDB6IiBmaWxsPSIjMDA3QThGIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iNyIgZmlsbD0id2hpdGUiLz48L3N2Zz4=',
-    label: 'Birkenhead Vape Shop — 45 Birkenhead Ave',
-  },
-]
+    label: 'Birkenhead Vape Shop',
+  }]
+
+  return (
+    <Globe
+      markers={markers}
+      config={{
+        atmosphereColor: C.cyan,
+        atmosphereIntensity: 0.5,
+        showAtmosphere: false,
+        autoRotateSpeed: 0,
+        bumpScale: 3,
+        enableZoom: false,
+        initialRotation: { x: -36.8681, y: 174.7624 },
+      }}
+      onMarkerClick={() => window.open('https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland', '_blank')}
+    />
+  )
+}
 
 export default function FindUsSection() {
   return (
@@ -33,7 +60,6 @@ export default function FindUsSection() {
       <div style={{ position:'absolute', inset:0, pointerEvents:'none', zIndex:0, opacity:0.04,
         backgroundImage:`url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='200' height='200'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.75' numOctaves='4'/%3E%3C/filter%3E%3Crect width='200' height='200' filter='url(%23n)'/%3E%3C/svg%3E")`,
         backgroundSize:'200px' }} />
-      <div style={{ position:'absolute', bottom:'10%', left:'-4%', width:420, height:420, background:'radial-gradient(ellipse,rgba(0,122,143,0.08),transparent 70%)', pointerEvents:'none', zIndex:0 }} />
       <div style={{ position:'absolute', bottom:0, left:0, right:0, height:2, background:`linear-gradient(90deg,transparent,${C.cyan},transparent)`, opacity:0.35, zIndex:1 }} />
 
       <div style={{ maxWidth:1200, margin:'0 auto', position:'relative', zIndex:2 }}>
@@ -47,22 +73,9 @@ export default function FindUsSection() {
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:'3rem', alignItems:'center' }}>
 
-          {/* 3D Globe */}
-          <Globe3D
-            markers={markers}
-            config={{
-              atmosphereColor: C.cyan,
-              atmosphereIntensity: 0.5,
-              showAtmosphere: false,
-              autoRotateSpeed: 0,
-              bumpScale: 3,
-              enableZoom: false,
-              initialRotation: { x: -36.8681, y: 174.7624 },
-            }}
-            onMarkerClick={() => window.open('https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland', '_blank')}
-          />
+          {/* Globe — dynamically loaded, fails gracefully */}
+          <GlobeWrapper />
 
-          {/* Info */}
           <div style={{ display:'flex', flexDirection:'column', gap:'1.8rem' }}>
 
             <div style={{ display:'flex', gap:'1rem', alignItems:'flex-start' }}>
@@ -84,9 +97,7 @@ export default function FindUsSection() {
               <div>
                 <p style={{ fontFamily:F, color:C.muted, fontSize:10, letterSpacing:'0.3em', margin:'0 0 5px' }}>WHATSAPP / PHONE</p>
                 <a href="https://wa.me/64223286322" target="_blank" rel="noopener noreferrer"
-                  style={{ fontFamily:F, color:C.ink, fontSize:'clamp(0.9rem,2vw,1.1rem)', textDecoration:'none', display:'flex', alignItems:'center', gap:8 }}
-                  onMouseEnter={e => (e.currentTarget.style.color = C.green)}
-                  onMouseLeave={e => (e.currentTarget.style.color = C.ink)}>
+                  style={{ fontFamily:F, color:C.ink, fontSize:'clamp(0.9rem,2vw,1.1rem)', textDecoration:'none', display:'flex', alignItems:'center', gap:8 }}>
                   022 328 6322
                   <span style={{ fontFamily:F, fontSize:9, color:'rgba(26,128,64,0.6)', letterSpacing:'0.2em' }}>TAP TO CHAT ↗</span>
                 </a>
@@ -104,9 +115,7 @@ export default function FindUsSection() {
             </div>
 
             <a href="https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland" target="_blank" rel="noopener noreferrer"
-              style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'0.85rem 2rem', border:`1px solid ${C.cyan}`, color:C.cyan, fontFamily:F, fontSize:'clamp(0.55rem,1.5vw,0.7rem)', letterSpacing:'0.22em', textDecoration:'none', alignSelf:'flex-start', borderRadius:2 }}
-              onMouseEnter={e => { e.currentTarget.style.background = C.cyan; e.currentTarget.style.color = '#fff' }}
-              onMouseLeave={e => { e.currentTarget.style.background = 'transparent'; e.currentTarget.style.color = C.cyan }}>
+              style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'0.85rem 2rem', border:`1px solid ${C.cyan}`, color:C.cyan, fontFamily:F, fontSize:'clamp(0.55rem,1.5vw,0.7rem)', letterSpacing:'0.22em', textDecoration:'none', alignSelf:'flex-start', borderRadius:2 }}>
               GET DIRECTIONS ↗
             </a>
 
