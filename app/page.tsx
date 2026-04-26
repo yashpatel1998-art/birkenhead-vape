@@ -221,9 +221,9 @@ export default function Home() {
         .ripple-el { position:absolute; width:30px;height:30px; border-radius:50%; background:rgba(0,229,255,0.35); transform:translate(-50%,-50%) scale(0); animation:rippleOut 0.65s ease forwards; pointer-events:none; z-index:10; }
 
         /* ═══ MOBILE-FIRST RESPONSIVE ═══ */
-        .products-wrapper { margin-top:0; }
+        .products-wrapper { margin-top:0; position:relative; z-index:10; }
         @media (min-width:768px) {
-          .products-wrapper { margin-top:-100vh; }
+          .products-wrapper { margin-top:-100vh; clip-path:inset(0 0 0 0); }
         }
         @media (hover:none) {
           .gc-quickview { opacity:1 !important; transform:translateY(0) !important; }
@@ -464,9 +464,13 @@ function HarbourScroll() {
       tl.to(el,     { opacity: 0, x: xIn,   ease: 'none', duration: 5 }, end - 5)
     })
 
+    // Store the trigger for cleanup
+    const myTrigger = tl.scrollTrigger
+
     return () => {
       cancelAnimationFrame(rafId)
-      ScrollTrigger.getAll().forEach(t => t.kill())
+      if (myTrigger) myTrigger.kill()
+      tl.kill()
       window.removeEventListener('resize', resize)
     }
   }, [isMobile])
@@ -1069,52 +1073,63 @@ function ZAFSection() {
   useEffect(() => {
     const mobile = window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)
     setIsMobile(mobile)
-    if (mobile) return  // skip GSAP pin on mobile
+    if (mobile) return
 
     gsap.registerPlugin(ScrollTrigger)
-    const wrap = wrapRef.current
-    if (!wrap) return
 
-    let lastIdx = -1
+    // Wait one frame for refs to be attached after render
+    const raf = requestAnimationFrame(() => {
+      const wrap = wrapRef.current
+      if (!wrap) return
 
-    ScrollTrigger.create({
-      trigger: wrap,
-      pin: true,
-      start: 'top top',
-      end: () => `+=${window.innerHeight * 5}`,
-      scrub: 0.3,
-      anticipatePin: 1,
-      onUpdate: (self) => {
-        const idx = Math.min(ZAF_FLAVOURS.length - 1, Math.floor(self.progress * ZAF_FLAVOURS.length))
-        if (idx !== lastIdx) {
-          lastIdx = idx
-          setCurrent(idx)
-          const nfl = ZAF_FLAVOURS[idx]
+      let lastIdx = -1
 
-          if (bgRef.current) {
-            gsap.to(bgRef.current, {
-              background: `radial-gradient(ellipse 80% 70% at 60% 55%, ${nfl.tint} 0%, rgba(0,0,0,0.95) 65%, #000 100%)`,
-              duration: 0.6, ease: 'power2.inOut',
-            })
+      const st = ScrollTrigger.create({
+        trigger: wrap,
+        pin: true,
+        start: 'top top',
+        end: () => `+=${window.innerHeight * 5}`,
+        scrub: 0.3,
+        anticipatePin: 1,
+        onUpdate: (self) => {
+          const idx = Math.min(ZAF_FLAVOURS.length - 1, Math.floor(self.progress * ZAF_FLAVOURS.length))
+          if (idx !== lastIdx) {
+            lastIdx = idx
+            setCurrent(idx)
+            const nfl = ZAF_FLAVOURS[idx]
+
+            if (bgRef.current) {
+              gsap.to(bgRef.current, {
+                background: `radial-gradient(ellipse 80% 70% at 60% 55%, ${nfl.tint} 0%, rgba(0,0,0,0.95) 65%, #000 100%)`,
+                duration: 0.6, ease: 'power2.inOut',
+              })
+            }
+            if (nameRef.current) {
+              gsap.fromTo(nameRef.current,
+                { opacity: 0, x: -20 },
+                { opacity: 1, x: 0, duration: 0.4, ease: 'power3.out' },
+              )
+            }
           }
-          if (nameRef.current) {
-            gsap.fromTo(nameRef.current,
-              { opacity: 0, x: -20 },
-              { opacity: 1, x: 0, duration: 0.4, ease: 'power3.out' },
-            )
-          }
-        }
-      },
+        },
+      })
+
+      if (bgRef.current) {
+        gsap.set(bgRef.current, {
+          background: `radial-gradient(ellipse 80% 70% at 60% 55%, ${ZAF_FLAVOURS[0].tint} 0%, rgba(0,0,0,0.95) 65%, #000 100%)`,
+        })
+      }
+
+      // Store for cleanup
+      ;(wrapRef as any)._st = st
     })
 
-    if (bgRef.current) {
-      gsap.set(bgRef.current, {
-        background: `radial-gradient(ellipse 80% 70% at 60% 55%, ${ZAF_FLAVOURS[0].tint} 0%, rgba(0,0,0,0.95) 65%, #000 100%)`,
-      })
+    return () => {
+      cancelAnimationFrame(raf)
+      const st = (wrapRef as any)?._st
+      if (st) { st.kill(); (wrapRef as any)._st = null }
     }
-
-    return () => ScrollTrigger.getAll().forEach(t => t.kill())
-  }, [])
+  }, [isMobile])
 
   // ── MOBILE: simple ZAF section ──
   if (isMobile === null) return <div style={{ height:'50vh', background:'#000' }} />
