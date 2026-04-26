@@ -9,21 +9,22 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
       background: '#000',
       display: 'flex', flexDirection: 'column',
       alignItems: 'center', justifyContent: 'center',
-      padding: '2rem',
+      padding: 'clamp(1rem,4vw,2rem)',
+      overflow: 'auto',
     }}>
 
       {/* Glow orbs */}
       <div style={{ position:'absolute', width:500, height:500, borderRadius:'50%', background:'radial-gradient(circle,rgba(0,229,255,0.08) 0%,transparent 70%)', top:'-10%', left:'-10%', filter:'blur(60px)', pointerEvents:'none' }} />
       <div style={{ position:'absolute', width:400, height:400, borderRadius:'50%', background:'radial-gradient(circle,rgba(191,0,255,0.08) 0%,transparent 70%)', bottom:'-10%', right:'-10%', filter:'blur(60px)', pointerEvents:'none' }} />
 
-      <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', gap:'2rem', maxWidth:420, width:'100%' }}>
+      <div style={{ position:'relative', zIndex:1, display:'flex', flexDirection:'column', alignItems:'center', textAlign:'center', gap:'clamp(1.2rem,4vw,2rem)', maxWidth:420, width:'100%' }}>
 
         {/* Logo */}
         <div>
-          <h1 style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(2.5rem,8vw,5rem)', color:'#fff', margin:0, letterSpacing:'0.2em', lineHeight:1 }}>
+          <h1 style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(2rem,8vw,5rem)', color:'#fff', margin:0, letterSpacing:'0.2em', lineHeight:1 }}>
             BVS<span style={{ color:'#00E5FF' }}>.</span>
           </h1>
-          <p style={{ fontFamily:F, color:'rgba(0,229,255,0.5)', fontSize:9, letterSpacing:'0.5em', margin:'8px 0 0' }}>BIRKENHEAD VAPE SHOP</p>
+          <p style={{ fontFamily:F, color:'rgba(0,229,255,0.5)', fontSize:'clamp(7px,2vw,9px)', letterSpacing:'0.5em', margin:'8px 0 0' }}>BIRKENHEAD VAPE SHOP</p>
         </div>
 
         {/* Divider */}
@@ -31,33 +32,35 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
 
         {/* Age check */}
         <div>
-          <p style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(1.2rem,4vw,1.8rem)', color:'#fff', margin:'0 0 8px', letterSpacing:'0.05em' }}>
+          <p style={{ fontFamily:F, fontWeight:900, fontSize:'clamp(1rem,5vw,1.8rem)', color:'#fff', margin:'0 0 8px', letterSpacing:'0.05em' }}>
             ARE YOU 18+?
           </p>
-          <p style={{ fontFamily:F, fontSize:10, color:'rgba(255,255,255,0.35)', letterSpacing:'0.2em', margin:0, lineHeight:1.8 }}>
+          <p style={{ fontFamily:F, fontSize:'clamp(8px,2.5vw,10px)', color:'rgba(255,255,255,0.35)', letterSpacing:'0.15em', margin:0, lineHeight:1.8 }}>
             You must be 18 or older to enter this site.<br />
             Vaping products contain nicotine.
           </p>
         </div>
 
-        {/* YES button — big, easy to tap */}
+        {/* YES button */}
         <button
           onClick={onConfirm}
           style={{
             width: '100%',
-            padding: '1.4rem 2rem',
+            padding: 'clamp(1rem,3.5vw,1.4rem) clamp(1rem,4vw,2rem)',
             background: 'linear-gradient(135deg, rgba(0,229,255,0.15), rgba(191,0,255,0.15))',
             border: '1px solid rgba(0,229,255,0.5)',
             borderRadius: 12,
             color: '#fff',
             fontFamily: F,
             fontWeight: 900,
-            fontSize: 'clamp(0.9rem,3vw,1.1rem)',
-            letterSpacing: '0.3em',
+            fontSize: 'clamp(0.7rem,3vw,1.1rem)',
+            letterSpacing: 'clamp(0.1em,1vw,0.3em)',
             cursor: 'pointer',
             transition: 'all 0.2s ease',
             WebkitTapHighlightColor: 'transparent',
             touchAction: 'manipulation',
+            minHeight: 56,
+            boxSizing: 'border-box' as const,
           }}
           onMouseEnter={e => {
             e.currentTarget.style.background = 'linear-gradient(135deg, rgba(0,229,255,0.25), rgba(191,0,255,0.25))'
@@ -73,12 +76,12 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
           YES, I AM 18+ — ENTER ↗
         </button>
 
-        {/* NO button — smaller, less prominent */}
+        {/* NO button */}
         <a
           href="https://www.google.com"
           style={{
             fontFamily: F,
-            fontSize: 9,
+            fontSize: 'clamp(7px,2vw,9px)',
             letterSpacing: '0.3em',
             color: 'rgba(255,255,255,0.2)',
             textDecoration: 'none',
@@ -90,7 +93,7 @@ export default function AgeGate({ onConfirm }: { onConfirm: () => void }) {
         </a>
 
         {/* Legal */}
-        <p style={{ fontFamily:F, fontSize:9, color:'rgba(255,255,255,0.15)', letterSpacing:'0.15em', lineHeight:1.8, margin:0 }}>
+        <p style={{ fontFamily:F, fontSize:'clamp(7px,2vw,9px)', color:'rgba(255,255,255,0.15)', letterSpacing:'0.12em', lineHeight:1.8, margin:0 }}>
           ⚠ NZ SMOKEFREE ACT COMPLIANT · 18+ ONLY
         </p>
 
