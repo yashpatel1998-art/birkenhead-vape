@@ -58,54 +58,58 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
         {/* Local Business Schema — tells Google exactly what your business is */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'Store',
-            name: 'Birkenhead Vape Shop',
-            description: 'Premium vape shop in Birkenhead, Auckland selling INMOOD, Wotofo, Slapple and Cloudys products.',
-            url: 'https://www.birkenheadvape.co.nz',
-            telephone: '+64223286322',
-            address: {
-              '@type': 'PostalAddress',
-              streetAddress: '45 Birkenhead Avenue',
-              addressLocality: 'Birkenhead',
-              addressRegion: 'Auckland',
-              postalCode: '0626',
-              addressCountry: 'NZ',
-            },
-            geo: {
-              '@type': 'GeoCoordinates',
-              latitude: -36.8109,
-              longitude: 174.7398,
-            },
-            openingHoursSpecification: [
-              { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday','Tuesday','Wednesday','Thursday','Friday','Saturday'], opens: '08:00', closes: '21:00' },
-              { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '08:00', closes: '20:00' },
-            ],
-            priceRange: '$10 - $35',
-            currenciesAccepted: 'NZD',
-            paymentAccepted: 'Cash, Credit Card',
-            hasMap: 'https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland',
-            sameAs: [],
-          })}}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'Store',
+              name: 'Birkenhead Vape Shop',
+              description: 'Premium vape shop in Birkenhead, Auckland selling INMOOD, Wotofo, Slapple and Cloudys products.',
+              url: 'https://www.birkenheadvape.co.nz',
+              telephone: '+64223286322',
+              address: {
+                '@type': 'PostalAddress',
+                streetAddress: '45 Birkenhead Avenue',
+                addressLocality: 'Birkenhead',
+                addressRegion: 'Auckland',
+                postalCode: '0626',
+                addressCountry: 'NZ',
+              },
+              geo: {
+                '@type': 'GeoCoordinates',
+                latitude: -36.8109,
+                longitude: 174.7398,
+              },
+              openingHoursSpecification: [
+                { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'], opens: '08:00', closes: '21:00' },
+                { '@type': 'OpeningHoursSpecification', dayOfWeek: ['Sunday'], opens: '08:00', closes: '20:00' },
+              ],
+              priceRange: '$10 - $35',
+              currenciesAccepted: 'NZD',
+              paymentAccepted: 'Cash, Credit Card',
+              hasMap: 'https://share.google/ycGj6DsMJHuL7Iajz',
+              sameAs: [],
+            })
+          }}
         />
 
         {/* Product catalog schema */}
         <script
           type="application/ld+json"
-          dangerouslySetInnerHTML={{ __html: JSON.stringify({
-            '@context': 'https://schema.org',
-            '@type': 'ItemList',
-            name: 'Vape Products — Birkenhead Vape Shop',
-            description: 'Premium vape pods, devices and e-liquids available at Birkenhead Vape Shop, Auckland.',
-            itemListElement: [
-              { '@type': 'ListItem', position: 1, name: 'INMOOD Switch Replacement Pod 26mg', description: '5,000 puffs · 10ml · 26mg/ml nic salt · 38 flavours', offers: { '@type': 'Offer', price: '15.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
-              { '@type': 'ListItem', position: 2, name: 'INMOOD Prism Starter Kit', description: '15,000 puffs · 1300mAh · 16ml · 16 flavours', offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
-              { '@type': 'ListItem', position: 3, name: 'Wotofo Nexpod 25K Starter Kit', description: '25,000 puffs · 18.5ml · dual mesh · 28 flavours', offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
-              { '@type': 'ListItem', position: 4, name: 'Slapple E-Liquid 20mg', description: '20mg nic salt · 15 flavours · made for pod systems', offers: { '@type': 'Offer', price: '25.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
-              { '@type': 'ListItem', position: 5, name: 'Cloudys E-Liquid 30ml', description: 'Nic salt · 3 strengths (11mg/20mg/28mg) · 18 flavours', offers: { '@type': 'Offer', price: '25.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
-            ],
-          })}}
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              '@context': 'https://schema.org',
+              '@type': 'ItemList',
+              name: 'Vape Products — Birkenhead Vape Shop',
+              description: 'Premium vape pods, devices and e-liquids available at Birkenhead Vape Shop, Auckland.',
+              itemListElement: [
+                { '@type': 'ListItem', position: 1, name: 'INMOOD Switch Replacement Pod 26mg', description: '5,000 puffs · 10ml · 26mg/ml nic salt · 38 flavours', offers: { '@type': 'Offer', price: '15.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
+                { '@type': 'ListItem', position: 2, name: 'INMOOD Prism Starter Kit', description: '15,000 puffs · 1300mAh · 16ml · 16 flavours', offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
+                { '@type': 'ListItem', position: 3, name: 'Wotofo Nexpod 25K Starter Kit', description: '25,000 puffs · 18.5ml · dual mesh · 28 flavours', offers: { '@type': 'Offer', price: '30.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
+                { '@type': 'ListItem', position: 4, name: 'Slapple E-Liquid 20mg', description: '20mg nic salt · 15 flavours · made for pod systems', offers: { '@type': 'Offer', price: '25.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
+                { '@type': 'ListItem', position: 5, name: 'Cloudys E-Liquid 30ml', description: 'Nic salt · 3 strengths (11mg/20mg/28mg) · 18 flavours', offers: { '@type': 'Offer', price: '25.00', priceCurrency: 'NZD', availability: 'https://schema.org/InStock' } },
+              ],
+            })
+          }}
         />
       </head>
       <body><SmoothScroll>{children}</SmoothScroll></body>

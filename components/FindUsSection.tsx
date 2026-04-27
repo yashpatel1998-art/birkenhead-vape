@@ -37,7 +37,7 @@ export default function FindUsSection() {
 
           {/* NZ Map — transparent with teal glow */}
           <div style={{ display:'flex', justifyContent:'center', alignItems:'center' }}>
-            <a href="https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland" target="_blank" rel="noopener noreferrer"
+            <a href="https://share.google/ycGj6DsMJHuL7Iajz" target="_blank" rel="noopener noreferrer"
               style={{ display:'block', cursor:'pointer', transition:'transform 0.3s ease', maxWidth:650, width:'100%' }}
               onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
               onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}>
@@ -88,7 +88,7 @@ export default function FindUsSection() {
               </div>
             </div>
 
-            <a href="https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland" target="_blank" rel="noopener noreferrer"
+            <a href="https://share.google/ycGj6DsMJHuL7Iajz" target="_blank" rel="noopener noreferrer"
               style={{ display:'inline-flex', alignItems:'center', gap:8, padding:'0.85rem 2rem', border:`1px solid ${C.cyan}`, color:C.cyan, fontFamily:F, fontSize:'clamp(0.55rem,1.5vw,0.7rem)', letterSpacing:'0.22em', textDecoration:'none', alignSelf:'flex-start', borderRadius:2 }}>
               GET DIRECTIONS ↗
             </a>

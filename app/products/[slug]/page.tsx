@@ -187,7 +187,7 @@ export default function ProductPage({ params }: { params: { slug: string } }) {
                 style={{ padding:'0.8rem 2rem', background:'rgba(37,211,102,0.15)', border:'1px solid rgba(37,211,102,0.5)', borderRadius:8, color:'#25D366', textDecoration:'none', fontSize:11, letterSpacing:'0.2em' }}>
                 WHATSAPP ↗
               </a>
-              <a href="https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland" target="_blank" rel="noopener noreferrer"
+              <a href="https://share.google/ycGj6DsMJHuL7Iajz" target="_blank" rel="noopener noreferrer"
                 style={{ padding:'0.8rem 2rem', background:'rgba(0,229,255,0.1)', border:'1px solid rgba(0,229,255,0.4)', borderRadius:8, color:'#00E5FF', textDecoration:'none', fontSize:11, letterSpacing:'0.2em' }}>
                 GET DIRECTIONS ↗
               </a>
