@@ -185,7 +185,7 @@ export default function Home() {
         .nav-dot { width:3px;height:3px;border-radius:50%;background:rgba(0,229,255,0.35);flex-shrink:0;position:relative;z-index:3; }
 
         /* Glass card */
-        .gc { position:relative; width:220px; min-height:310px; flex-shrink:0; border-radius:20px; overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,0.18); transition:transform 0.4s cubic-bezier(.23,1,.32,1), box-shadow 0.4s ease, border-color 0.4s ease; animation:cardIn 0.55s cubic-bezier(.23,1,.32,1) both; }
+        .gc { position:relative; width:220px; min-height:310px; flex-shrink:0; border-radius:20px; overflow:hidden; cursor:pointer; border:1px solid rgba(255,255,255,0.18); transition:transform 0.4s cubic-bezier(.23,1,.32,1), box-shadow 0.4s ease, border-color 0.4s ease; }
         .gc:hover { transform:translateY(-12px) scale(1.025); box-shadow:0 30px 70px rgba(0,0,0,0.55),0 0 0 1px rgba(142,207,216,0.25),0 0 40px rgba(142,207,216,0.08),inset 0 1px 0 rgba(255,255,255,0.25); border-color:rgba(142,207,216,0.3); }
         .gc-blob { position:absolute; border-radius:50%; pointer-events:none; transition:filter 0.5s ease, opacity 0.5s ease; }
         .gc:hover .gc-blob { filter:blur(10px) brightness(1.8) !important; opacity:0.9 !important; }
@@ -223,7 +223,7 @@ export default function Home() {
         /* ═══ MOBILE-FIRST RESPONSIVE ═══ */
         .products-wrapper { margin-top:0; position:relative; z-index:10; }
         @media (min-width:768px) {
-          .products-wrapper { margin-top:-100vh; clip-path:inset(0 0 0 0); }
+          .products-wrapper { margin-top:-100vh; }
         }
         @media (hover:none) {
           .gc-quickview { opacity:1 !important; transform:translateY(0) !important; }
@@ -683,7 +683,7 @@ function GlassCard({ product, brandColor, index, onOpen }: {
   const d4=[8,6,7,5.5,8.5,6.5,7.5,5,8.2,6.2,7.2,5.3,8.8][index%13]
 
   return (
-    <div ref={cardRef} className="gc" style={{ animationDelay:`${(index*0.07).toFixed(2)}s`, transformStyle:'preserve-3d' }}
+    <div ref={cardRef} className="gc" style={{ transformStyle:'preserve-3d', scrollSnapAlign:'start' }}
       onMouseMove={onMouseMove} onMouseEnter={onMouseEnter} onMouseLeave={onMouseLeave}
       onTouchStart={onTouchStart} onClick={onClick}>
 
@@ -893,53 +893,7 @@ function ProductsSection() {
 
   useEffect(() => { setActiveCategory('ALL'); setSearch('') }, [activeBrand])
 
-  // ── Horizontal pin scroll (desktop only) ──
-  useEffect(() => {
-    // Skip pin on mobile — natural swipe is better
-    if (window.innerWidth < 768 || /Android|iPhone|iPad|iPod/i.test(navigator.userAgent)) return
-
-    gsap.registerPlugin(ScrollTrigger)
-    const pin  = pinRef.current
-    const cards = cardsRef.current
-    if (!pin || !cards) return
-
-    // Kill previous
-    if (tweenRef.current) {
-      tweenRef.current.scrollTrigger?.kill()
-      tweenRef.current.kill()
-      tweenRef.current = null
-    }
-
-    gsap.set(cards, { x: 0 })
-
-    // Wait one frame for React to render cards
-    const raf = requestAnimationFrame(() => {
-      const w = cards.scrollWidth - pin.clientWidth
-      if (w <= 0) return
-
-      tweenRef.current = gsap.to(cards, {
-        x: -w,
-        ease: 'none',
-        scrollTrigger: {
-          trigger:        pin,
-          pin:            true,
-          start:          'top top',
-          end:            `+=${w}`,
-          scrub:          0.5,
-          anticipatePin:  1,
-        },
-      })
-    })
-
-    return () => {
-      cancelAnimationFrame(raf)
-      if (tweenRef.current) {
-        tweenRef.current.scrollTrigger?.kill()
-        tweenRef.current.kill()
-        tweenRef.current = null
-      }
-    }
-  }, [activeBrand, activeCategory, search, filtered.length])
+  // No GSAP pin — use natural scroll for reliability
 
   return (
     <>
@@ -948,8 +902,8 @@ function ProductsSection() {
       {/* Outer shell — handles blanket overlap positioning */}
       <div id="products" className="products-wrapper" style={{ position:'relative', zIndex:10 }}>
 
-        {/* Pin target — this gets position:fixed by GSAP */}
-        <div ref={pinRef} style={{ overflow:'hidden', borderRadius:'28px 28px 0 0', background:'#000', position:'relative' }}>
+        {/* Pin target */}
+        <div ref={pinRef} style={{ borderRadius:'28px 28px 0 0', background:'#000', position:'relative', overflow:'hidden' }}>
 
           {/* Video bg + overlays */}
           <video src="/skytower.mp4" autoPlay muted loop playsInline style={{ position:'absolute', inset:0, width:'100%', height:'100%', objectFit:'cover', zIndex:0, opacity:0.55 }} />
@@ -1012,7 +966,7 @@ function ProductsSection() {
             </div>
 
             {/* Cards — horizontal scroll track */}
-            <div ref={cardsRef} className="cards-row" style={{ display:'flex', gap:'1.1rem', padding:'0.5rem 2rem 1.5rem', overflowX:'auto' }}>
+            <div ref={cardsRef} className="cards-row products-cards" style={{ display:'flex', gap:'1.1rem', padding:'0.5rem 2rem 1.5rem', overflowX:'auto', scrollSnapType:'x mandatory', WebkitOverflowScrolling:'touch' }}>
               <div style={{ flexShrink:0, width:8 }} />
               {filtered.length > 0 ? filtered.map((p,i) => (
                 <GlassCard key={p.name} product={p} brandColor={brand.color} index={i} onOpen={setModal} />
