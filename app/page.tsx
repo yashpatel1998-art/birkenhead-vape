@@ -56,7 +56,7 @@ const BRANDS = [
     ],
   },
   {
-    name: 'NIC SALT 30ML', color: '#00e5ff',
+    name: 'VAPURE NIC SALT', color: '#00e5ff',
     products: [
       { name: 'Slapple E-Liquid 20mg 30ml',       badge: 'NIC SALT', badgeColor: '#00e5ff', puffs: '30ml', price: '$25.00', specs: '20mg nicotine salt · 30ml · Made for pod systems', nicotine: '20mg/ml Nic Salt', note: 'Mix of Ice & Zero Ice flavours', flavours: ['Banana (Zero Ice)','Berries (Zero Ice)','Blackberry Lemon','Blueberry Raspberry','Blueberry Raspberry (Zero Ice)','Caramel Custard','Caramel Tobacco (Zero Ice)','Kiwifruit Pineapple','Lychee Peach','Peach Pineapple (Zero Ice)','Pineapple Lemon','Sour Lemon','Strawberry Watermelon','Strawberry Guava (Zero Ice)','Tropical Berry'] },
       { name: 'Slapple E-Liquid 10mg 30ml',       badge: 'NIC SALT', badgeColor: '#00e5ff', puffs: '30ml', price: '$25.00', specs: '10mg nicotine salt · 30ml · Lower strength · Made for pod systems', nicotine: '10mg/ml Nic Salt', note: 'Mix of Ice & Zero Ice flavours', flavours: ['Banana (Zero Ice)','Berries (Zero Ice)','Blackberry Lemon','Blueberry Raspberry','Blueberry Raspberry (Zero Ice)','Caramel Custard','Caramel Tobacco (Zero Ice)','Kiwifruit Pineapple','Lychee Peach','Peach Pineapple (Zero Ice)','Pineapple Lemon','Sour Lemon','Strawberry Watermelon','Strawberry Guava (Zero Ice)','Tropical Berry'] },
@@ -74,7 +74,7 @@ const BRANDS = [
           { strength: '28mg', nicSalt: '50mg Nic Salt', note: 'High — for heavy smokers',      color: '#f87171' },
         ]
       },
-      { name: 'NZ Vapor Nic Salts 30ml',          badge: 'NIC SALT', badgeColor: '#00e5ff', puffs: '30ml', price: '$10.00', specs: 'Nic salt · 30ml · Pod systems · NZ made', nicotine: 'Nic Salt', note: 'Locally made NZ brand', flavours: ['Fizz Berry','Grape Ice','Premium Blue','Aloe Pear','Arctic Ice','Blackcurrant Ice','Peach Ice','Perfectly Mint','Premium Gold','Premium Red','Premium Silver','Razz Ripple','Royale Vape','Stoney Fruits','Strawberry'] },
+      { name: 'Vapure Nic Salt by NZVapor 30ml',  badge: 'NIC SALT', badgeColor: '#00e5ff', puffs: '30ml', price: '$10.00', specs: 'Nic salt · 30ml · Pod systems · NZ made', nicotine: 'Nic Salt', note: 'Locally made NZ brand', flavours: ['Fizz Berry','Grape Ice','Premium Blue','Aloe Pear','Arctic Ice','Blackcurrant Ice','Peach Ice','Perfectly Mint','Premium Gold','Premium Red','Premium Silver','Razz Ripple','Royale Vape','Stoney Fruits','Strawberry'] },
     ],
   },
   {
@@ -487,13 +487,13 @@ function HarbourScroll() {
         <div style={{ position:'absolute', width:300, height:300, borderRadius:'50%', background:'radial-gradient(circle,rgba(142,207,216,0.06) 0%,transparent 70%)', top:'-5%', right:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb1 16s ease-in-out infinite' }} />
         <div style={{ position:'absolute', width:250, height:250, borderRadius:'50%', background:'radial-gradient(circle,rgba(184,160,208,0.05) 0%,transparent 70%)', bottom:'10%', left:'-5%', filter:'blur(40px)', pointerEvents:'none', animation:'floatOrb2 20s ease-in-out infinite' }} />
         <div style={{ position:'absolute', inset:0, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', zIndex:2, padding:'0 1.5rem', textAlign:'center' }}>
-          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(142,207,216,0.7)', fontSize:9, letterSpacing:'0.5em', marginBottom:16 }}>// Birkenhead, Auckland — Est. 2024</p>
+          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'#8ECFD8', fontSize:9, letterSpacing:'0.5em', marginBottom:16 }}>// Birkenhead, Auckland — Est. 2024</p>
           <h1 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
-            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#F0EDE6' }}>BIRKENHEAD</span>
-            <span style={{ display:'block', fontSize:'clamp(2.8rem,14vw,6rem)', color:'#8ECFD8', textShadow:'0 0 50px rgba(142,207,216,0.35)' }}>VAPE</span>
-            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#B8A0D0', textShadow:'0 0 50px rgba(184,160,208,0.3)' }}>SHOP</span>
+            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#FFFFFF' }}>BIRKENHEAD</span>
+            <span style={{ display:'block', fontSize:'clamp(2.8rem,14vw,6rem)', color:'#00E5FF' }}>VAPE</span>
+            <span style={{ display:'block', fontSize:'clamp(2rem,10vw,4rem)', color:'#BF00FF' }}>SHOP</span>
           </h1>
-          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(240,237,230,0.3)', fontSize:10, letterSpacing:'0.4em', marginTop:20 }}>THE CLOUD HAS LANDED</p>
+          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'#FFFFFF', fontSize:10, letterSpacing:'0.4em', marginTop:20 }}>THE CLOUD HAS LANDED</p>
           <div style={{ display:'flex', gap:'0.8rem', marginTop:30, flexWrap:'wrap', justifyContent:'center' }}>
             <a href="#products" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(142,207,216,0.6)', color:'#B8E8EE', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>BROWSE PRODUCTS</a>
             <a href="#find-us" style={{ padding:'0.85rem 2rem', border:'1px solid rgba(255,255,255,0.2)', color:'rgba(240,237,230,0.6)', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'0.65rem', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>FIND US</a>
@@ -524,11 +524,11 @@ function HarbourScroll() {
       <div style={{ position:'sticky', top:0, height:'100vh', overflow:'hidden' }}>
         <canvas ref={canvasRef} style={{ position:'absolute', inset:0, width:'100%', height:'100%' }} />
         <div id="hero" style={{ position:'absolute', inset:0, zIndex:4, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'0 1.5rem', pointerEvents:'none' }}>
-          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'rgba(142,207,216,0.7)', fontSize:'clamp(9px,2vw,11px)', letterSpacing:'0.5em', marginBottom:16, opacity:0.7 }}>// Birkenhead, Auckland — Est. 2024</p>
+          <p style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", color:'#8ECFD8', fontSize:'clamp(9px,2vw,11px)', letterSpacing:'0.5em', marginBottom:16 }}>// Birkenhead, Auckland — Est. 2024</p>
           <h1 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
-            <span style={{ display:'block', fontSize:'clamp(1.8rem,7vw,6rem)', color:'#fff', textShadow:'0 0 40px rgba(255,255,255,0.2)' }}>BIRKENHEAD</span>
-            <span style={{ display:'block', fontSize:'clamp(2.5rem,11vw,9rem)', color:'#8ECFD8', textShadow:'0 0 60px rgba(142,207,216,0.5)' }}>VAPE</span>
-            <span style={{ display:'block', fontSize:'clamp(1.8rem,7vw,6rem)', color:'#BF00FF', textShadow:'0 0 80px rgba(191,0,255,0.8)' }}>SHOP</span>
+            <span style={{ display:'block', fontSize:'clamp(1.8rem,7vw,6rem)', color:'#FFFFFF' }}>BIRKENHEAD</span>
+            <span style={{ display:'block', fontSize:'clamp(2.5rem,11vw,9rem)', color:'#00E5FF' }}>VAPE</span>
+            <span style={{ display:'block', fontSize:'clamp(1.8rem,7vw,6rem)', color:'#BF00FF' }}>SHOP</span>
           </h1>
         </div>
         {[
@@ -549,8 +549,8 @@ function HarbourScroll() {
         ))}
         <div id="end-text" style={{ position:'absolute', inset:0, zIndex:4, display:'flex', flexDirection:'column', alignItems:'center', justifyContent:'center', textAlign:'center', padding:'0 1.5rem', pointerEvents:'none', opacity:0 }}>
           <h2 style={{ fontFamily:"'Aharoni','Arial Black',sans-serif", fontWeight:900, lineHeight:1, margin:0 }}>
-            <span style={{ display:'block', fontSize:'clamp(2.5rem,10vw,8rem)', color:'#fff', textShadow:'0 0 60px rgba(255,255,255,0.2)' }}>THE CLOUD</span>
-            <span style={{ display:'block', fontSize:'clamp(2.5rem,10vw,8rem)', color:'#8ECFD8', textShadow:'0 0 60px rgba(142,207,216,0.5)' }}>HAS LANDED</span>
+            <span style={{ display:'block', fontSize:'clamp(2.5rem,10vw,8rem)', color:'#FFFFFF' }}>THE CLOUD</span>
+            <span style={{ display:'block', fontSize:'clamp(2.5rem,10vw,8rem)', color:'#00E5FF' }}>HAS LANDED</span>
           </h2>
           <div style={{ display:'flex', gap:'1rem', marginTop:40, pointerEvents:'auto', flexWrap:'wrap', justifyContent:'center' }}>
             <a href="#products" style={{ padding:'1.2rem 3rem', border:'1px solid #fff', color:'#fff', fontFamily:"'Aharoni','Arial Black',sans-serif", fontSize:'clamp(0.7rem,1.8vw,1rem)', letterSpacing:'0.25em', textDecoration:'none', fontWeight:700 }}>PRODUCTS +</a>
