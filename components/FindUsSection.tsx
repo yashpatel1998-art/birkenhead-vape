@@ -1,7 +1,5 @@
 'use client'
 
-import { useEffect, useState } from 'react'
-
 const F = "'Aharoni','Arial Black',Arial,sans-serif"
 
 const C = {
@@ -13,42 +11,6 @@ const C = {
   muted: '#7C748A',
   cyan:  '#007A8F',
   green: '#1A8040',
-}
-
-function GlobeWrapper() {
-  const [Globe, setGlobe] = useState<any>(null)
-  const [failed, setFailed] = useState(false)
-
-  useEffect(() => {
-    // Dynamic import — if Globe3D fails, we just skip it
-    import('@/components/ui/3d-globe')
-      .then(mod => setGlobe(() => mod.Globe3D))
-      .catch(() => setFailed(true))
-  }, [])
-
-  if (failed || !Globe) return null
-
-  const markers = [{
-    lat: -36.8109, lng: 174.7398,
-    src: 'data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMzIiIGhlaWdodD0iNDAiIHZpZXdCb3g9IjAgMCAzMiA0MCIgZmlsbD0ibm9uZSIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cGF0aCBkPSJNMTYgMEM3LjE2MyAwIDAgNy4xNjMgMCAxNmMwIDEwIDE2IDI0IDE2IDI0UzMyIDI2IDMyIDE2QzMyIDcuMTYzIDI0LjgzNyAwIDE2IDB6IiBmaWxsPSIjMDA3QThGIi8+PGNpcmNsZSBjeD0iMTYiIGN5PSIxNiIgcj0iNyIgZmlsbD0id2hpdGUiLz48L3N2Zz4=',
-    label: 'Birkenhead Vape Shop',
-  }]
-
-  return (
-    <Globe
-      markers={markers}
-      config={{
-        atmosphereColor: C.cyan,
-        atmosphereIntensity: 0.5,
-        showAtmosphere: false,
-        autoRotateSpeed: 0,
-        bumpScale: 3,
-        enableZoom: false,
-        initialRotation: { x: -36.8681, y: 174.7624 },
-      }}
-      onMarkerClick={() => window.open('https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland', '_blank')}
-    />
-  )
 }
 
 export default function FindUsSection() {
@@ -73,9 +35,21 @@ export default function FindUsSection() {
 
         <div style={{ display:'grid', gridTemplateColumns:'repeat(auto-fit,minmax(300px,1fr))', gap:'3rem', alignItems:'center' }}>
 
-          {/* Globe — dynamically loaded, fails gracefully */}
-          <GlobeWrapper />
+          {/* NZ Map — transparent with teal glow */}
+          <div style={{ display:'flex', justifyContent:'center', alignItems:'center' }}>
+            <a href="https://maps.google.com/?q=45+Birkenhead+Avenue+Auckland" target="_blank" rel="noopener noreferrer"
+              style={{ display:'block', cursor:'pointer', transition:'transform 0.3s ease', maxWidth:650, width:'100%' }}
+              onMouseEnter={e => (e.currentTarget.style.transform = 'scale(1.02)')}
+              onMouseLeave={e => (e.currentTarget.style.transform = 'scale(1)')}>
+              <img
+                src="/nz-map.png"
+                alt="New Zealand Map — Birkenhead Vape Shop, Auckland"
+                style={{ width:'100%', height:'auto', display:'block' }}
+              />
+            </a>
+          </div>
 
+          {/* Info */}
           <div style={{ display:'flex', flexDirection:'column', gap:'1.8rem' }}>
 
             <div style={{ display:'flex', gap:'1rem', alignItems:'flex-start' }}>
